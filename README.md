@@ -1,5 +1,7 @@
 **Backend Developer Project - FAQs Management with Multi-language Support**
 
+**GitHub Repository:-** [https://github.com/AbhishekChetiya/FAQ_Translator](https://github.com/AbhishekChetiya/FAQ_Translator)
+**Email:-** [a1.bhishek.p1.andey@gmail.com](mailto:a1.bhishek.p1.andey@gmail.com)
 **Objective :-** 
 This project aims to design a backend system for managing FAQs with multi-language support. The main features include:
 
@@ -10,17 +12,15 @@ Multi-language translations for FAQs. API for CRUD operations with caching and p
 The first step was to create the FAQ model. Here's how I structured the model:
 Fields: question: A TextField to store the FAQ question. answer: A CKEditor5Field to allow users to store rich-text answers. language: A CharField to handle different languages (English, Hindi, Bengali, etc.). I also added a method for string representation (str), which shows the FAQ in a user-friendly format: def str(self): return f"FAQ: {self.question} ({self.language})" The model ensures that the combination of question and language is unique using the unique_together constraint.
 
-
 **WYSIWYG Editor Integration**
 I integrated the CKEditor5 WYSIWYG editor to allow rich-text formatting for FAQ answers. To achieve this:
 I installed the django-ckeditor-5 package and configured it in the settings. Used the CKEditor5Field to enable rich-text support in the FAQ model. This integration allows users to format their answers easily with text styling, links, images, etc.
-
 
 **Multi-language Editor To support multi-language content:**
 I added separate fields for different languages (like question_hi, question_bn, etc.) for each FAQ. 
 The system uses Google Translate API to automatically translate content during FAQ creation (using the googletrans library). The translated content is stored in the database and the fallback mechanism ensures English is used if no translation is available.
 
-**Frontend Though the primary focus is backend development**, I created a basic frontend to interact with the API. Here's what I did:
+4. **Frontend Though the primary focus is backend development**, I created a basic frontend to interact with the API. Here's what I did:
 Used HTML and JavaScript to create simple forms for submitting FAQs in Django. A dropdown was added for users to select the language when submitting a new FAQ.
 
 **Google Translation For multi-language support,** I integrated Google Translate API using the googletrans library. This is how the translation works:
@@ -48,6 +48,12 @@ Project Structure faqs/models.py: Contains the FAQ model, translations, and rela
 **Run migrations**: bash Copy Edit python manage.py migrate
 Start the Django development server: python manage.py runserver
 API Usage
+
+Here Is Some ScreenShot Of the Project on the LocalHost:-
+
+![Image](https://github.com/user-attachments/assets/6aba289b-31f1-4f56-a601-4fd3e71e7f92)
+![Image](https://github.com/user-attachments/assets/ccec6f9b-714a-4b01-a458-a1eecf823a9a)
+![Image](https://github.com/user-attachments/assets/327b1c54-cc17-4bf9-a881-c576e27d83ce)
 
 Create FAQ POST /api/faqs/
 { "question": "What is Django?", "answer": "A web framework.", "language": "en" } 2. Get FAQ by Language GET /api/faqs/?lang=hi

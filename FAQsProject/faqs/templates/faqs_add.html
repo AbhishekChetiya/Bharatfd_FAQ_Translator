@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add FAQ</title>
+    <!-- Load CKEditor 5 -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+
+    <style>
+        /* General styling for the form */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        select, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical; /* Allow vertical resizing */
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Styling for CKEditor 5 */
+        .ck-editor__editable {
+            min-height: 300px; /* Set a minimum height for the editor */
+        }
+    </style>
+</head>
+<body>
+    <h1>Add FAQ</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="language">Language:</label>
+        <select name="language" id="language">
+            <option value="en">English</option>
+            <option value="hi">Hindi</option>
+            <option value="bn">Bengali</option>
+            <!-- Add more languages as needed -->
+        </select>
+
+        <label for="question">Question:</label>
+        <textarea name="question" id="question" rows="4" cols="50"></textarea>
+
+        <label for="answer">Answer:</label>
+        <textarea name="answer" id="answer" rows="4" cols="50"></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- Initialize CKEditor 5 -->
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#answer'), {
+                toolbar: [
+                    'undo', 'redo', '|',
+                    'heading', '|',
+                    'bold', 'italic', 'link', '|',
+                    'bulletedList', 'numberedList', 'blockQuote', '|',
+                    'fontSize', 'fontFamily', '|',
+                    'alignment', 'outdent', 'indent', '|',
+                ],
+                height: '300px',  // Set the height of the editor
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+</body>
+{% endblock%}

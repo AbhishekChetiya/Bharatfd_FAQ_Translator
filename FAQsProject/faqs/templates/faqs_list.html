@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block title %}FAQ List{% endblock %}
+
+{% block extra_css %}
+  <style>
+    /* General styling for the page */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+
+    /* Styling for the form */
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      margin: 20px auto;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    select, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    textarea {
+      height: 100px;
+      resize: vertical;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Styling for the FAQ list */
+    ul {
+      list-style-type: none;
+      padding: 0;
+      max-width: 800px;
+      margin: 20px auto;
+    }
+
+    li {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    li strong {
+      color: #007bff;
+      font-size: 18px;
+    }
+
+    li p {
+      margin: 10px 0 0;
+      color: #555;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <h1>FAQs</h1>
+  <form method="get">
+      <label for="lang">Select Language:</label>
+      <select name="lang" id="lang" onchange="this.form.submit()">
+          <option value="en" {% if request.GET.lang == 'en' %}selected{% endif %}>English</option>
+          <option value="hi" {% if request.GET.lang == 'hi' %}selected{% endif %}>Hindi</option>
+          <option value="bn" {% if request.GET.lang == 'bn' %}selected{% endif %}>Bengali</option>
+          <!-- Add more languages as needed -->
+      </select>
+  </form>
+  <ul>
+      {% for faq in faqs %}
+          <li>
+              
+              <strong>{{ faq.question }}</strong><br>
+              {{ faq.answer|safe }}  <!-- Use the 'safe' filter to render HTML -->
+          </li>
+      {% empty %}
+          <li>No FAQs available.</li>
+      {% endfor %}
+  </ul>
+{% endblock %}
